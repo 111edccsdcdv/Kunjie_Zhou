@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.proxy.ustclug.org/css2?family=Noto+Sans+SC:wght@300;400;700&family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.font.im/css2?family=Smiley+Sans:wght@400;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html, body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #dbeafe 0%, #c7d2fe 50%, #e9d5ff 100%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: 'Smiley Sans', 'Noto Sans Rounded SC', 'Noto Sans SC', 'Microsoft YaHei', 'sans-serif';
+  font-weight: 300;
+}
+
+.card-3d {
+  transform: perspective(800px);
+  transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+}
+.card-3d:hover {
+  transform: perspective(800px) rotateY(-16deg);
+}
