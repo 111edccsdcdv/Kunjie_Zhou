@@ -34,16 +34,9 @@ export default function NotificationTrackerPage() {
       }}
     >
       {/* 顶部导航栏 */}
-      <nav className="relative z-10 flex items-center justify-center bg-white/40 backdrop-blur-2xl border-b border-blue-100 px-8 py-4 mt-6 mb-8 shadow-lg rounded-[2.5rem] min-h-[72px] ring-2 ring-white/40 max-w-7xl w-full mx-auto" style={{boxShadow:'0 4px 32px 0 rgba(31,38,135,0.18),0 0 24px 2px #fff6,0 0 0 2px #fff4 inset',backdropFilter:'blur(24px)'}}>
-        {/* 左侧logo */}
+      <nav className="relative z-10 flex items-center justify-between bg-white/40 backdrop-blur-2xl border-b border-blue-100 px-8 py-4 mt-6 mb-8 shadow-lg rounded-[2.5rem] min-h-[72px] ring-2 ring-white/40 max-w-7xl w-full mx-auto" style={{boxShadow:'0 4px 32px 0 rgba(31,38,135,0.18),0 0 24px 2px #fff6,0 0 0 2px #fff4 inset',backdropFilter:'blur(24px)'}}>
+        {/* 左侧logo (New SVG Logo) */}
         <div className="absolute left-8 flex items-center gap-2">
-          <Image src="/robot-3d.png" alt="logo" width={44} height={44} className="rounded-full bg-white shadow border border-blue-200" />
-        </div>
-        {/* 标题居中 */}
-        <span
-          className="flex items-center gap-2 text-lg font-bold text-blue-900 tracking-wide select-none drop-shadow text-center"
-          style={{fontFamily: `'Quicksand', 'Nunito', 'Noto Sans Rounded', 'Noto Sans SC', 'Poppins', 'Microsoft YaHei', 'sans-serif'`,letterSpacing: 1,fontWeight: 700}}
-        >
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="4" y="8" width="24" height="16" rx="8" fill="#4F8CFF"/>
             <ellipse cx="12" cy="16" rx="2.5" ry="3" fill="#fff"/>
@@ -51,6 +44,12 @@ export default function NotificationTrackerPage() {
             <rect x="13.5" y="21" width="5" height="2" rx="1" fill="#fff"/>
             <circle cx="16" cy="16" r="15" stroke="#4F8CFF" strokeWidth="2" fill="none"/>
           </svg>
+        </div>
+        {/* 标题居中 (Restored to Center) */}
+        <span
+          className="absolute left-1/2 -translate-x-1/2 text-lg font-bold text-blue-900 tracking-wide select-none drop-shadow text-center"
+          style={{fontFamily: `'Quicksand', 'Nunito', 'Noto Sans Rounded', 'Noto Sans SC', 'Poppins', 'Microsoft YaHei', 'sans-serif'`,letterSpacing: 1,fontWeight: 700}}
+        >
           AI家校沟通助手
         </span>
         {/* 右侧菜单 */}

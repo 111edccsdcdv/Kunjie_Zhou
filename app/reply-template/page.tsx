@@ -160,7 +160,7 @@ export default function ReplyTemplatePage() {
       <h1 className="text-3xl font-bold text-blue-900 mb-8 text-center">回复模板管理</h1>
 
       {/* 主体内容区域 */}
-      <main className="relative z-10 flex flex-col md:flex-row gap-8 max-w-6xl mx-auto py-6 px-4 w-full">
+      <main className="relative z-10 flex flex-col md:flex-row gap-8 max-w-6xl mx-auto py-6 px-4 w-full items-stretch">
         {/* Left Column: Input and AI Suggestion */}
         <div className="flex-1 flex flex-col gap-8">
           {/* 家长提问输入区域 */}
@@ -211,7 +211,7 @@ export default function ReplyTemplatePage() {
           <section className="w-full bg-white/70 backdrop-blur-2xl rounded-2xl shadow-lg border border-blue-100 p-6 flex-1 overflow-y-auto"> {/* Added flex-1 and overflow-y-auto */}
               <h2 className="text-xl font-bold text-blue-800 mb-4">已保存的回复模板 ({savedTemplates.length})</h2>
               {savedTemplates.length > 0 ? (
-                  <div className="flex flex-col gap-4"> {/* Removed overflow-y-auto and flex-1 here, handled by parent section */}
+                  <div className="flex flex-col gap-4 flex-1 overflow-y-auto"> {/* Add flex flex-col gap-4 flex-1 overflow-y-auto */}
                       {savedTemplates.map((template, index) => (
                           <div key={index} className="p-4 bg-white rounded-lg shadow-sm border border-blue-100 cursor-pointer transition hover:shadow-md" onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}>
                               {expandedIndex === index ? (
