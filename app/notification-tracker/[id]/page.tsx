@@ -290,7 +290,7 @@ const donutColors = ["#4F8CFF", "#E3E8F0"];
 
 export default function NotificationDetail({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const { id } = params; // 直接访问 params.id
+  const { id } = params;
 
   const [notification, setNotification] = useState<NotificationDetailType | null>(null);
   const [filter, setFilter] = useState<'all' | 'read' | 'unread'>('all');
