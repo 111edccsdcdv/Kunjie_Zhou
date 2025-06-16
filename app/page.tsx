@@ -23,8 +23,8 @@ const features = [
     link: "/notification-tracker",
   },
   {
-    title: "回复模板管理",
-    desc: "管理常用回复模板，AI生成标准答复。",
+    title: "回复优化助手",
+    desc: "教师可以针对系统外的提问手动输入进行回复优化。",
     icon: <HiOutlineEnvelope className="h-12 w-12 text-purple-300" />,
     link: "/reply-template",
   },

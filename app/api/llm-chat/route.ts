@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(req: NextRequest) {
   const { messages } = await req.json();
 
-  const apiKey = process.env.DEEPSEEK_API_KEY;
+  
+const apiKey = process.env.DEEPSEEK_API_KEY;
   console.log("DEEPSEEK_API_KEY status:", typeof apiKey, apiKey ? "Loaded" : "Not Loaded", apiKey ? apiKey.substring(0, 5) + "..." : "N/A");
 
   const url = "https://api.deepseek.com/v1/chat/completions";
-
   const body = {
     model: "deepseek-chat",
     messages,

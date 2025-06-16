@@ -6,32 +6,43 @@ import { HiOutlineDocumentText, HiOutlinePlus } from "react-icons/hi2";
 import { PieChart, Pie, Cell } from "recharts";
 import Image from "next/image";
 
+// 定义 Notification 接口
+interface Notification {
+  id: string;
+  title: string;
+  date: string;
+  expired: boolean;
+  category: string; // 新增的类别字段
+  content: string; // 新增的通知内容字段
+}
+
 // 假数据
-const notifications = [
-  { id: "n1", title: "关于春游活动的通知", date: "2024-05-01", expired: false },
-  { id: "n2", title: "五一假期安全提醒", date: "2024-04-28", expired: true },
-  { id: "n3", title: "家长会时间安排", date: "2024-04-25", expired: true },
+const notifications: Notification[] = [
+  { id: "n1", title: "关于2024年春季运动会安排的通知", date: "2024-05-01", expired: false, category: "学校活动", content: "亲爱的同学们、家长们，我校定于2024年5月15日（星期三）上午8:30在学校操场隆重举行春季运动会。本次运动会将设短跑、跳远、铅球、接力等多个项目，旨在增强学生体质，培养团队协作精神。请各位同学根据自身兴趣和特长积极报名参加各项比赛，展现青春风采！报名截止日期为5月10日，请班主任老师协助组织报名工作，确保各项准备就绪。期待大家在运动会上取得优异成绩！" },
+  { id: "n2", title: "庆祝六一儿童节文艺汇演报名通知", date: "2024-04-28", expired: true, category: "学校活动", content: "为庆祝即将到来的六一国际儿童节，我校将于5月28日（星期二）下午2:00在学校礼堂举办盛大的文艺汇演。本次汇演旨在为孩子们提供一个展示才艺、放飞梦想的舞台。现面向全体学生征集各类节目，包括歌舞、朗诵、乐器演奏、相声小品等。欢迎同学们踊跃报名，发挥创意，展现你们的独特魅力！报名截止日期为5月15日，请同学们将节目名称、表演形式及参演人员名单报至班主任处。期待一场精彩纷呈的儿童节盛宴！" },
+  { id: "n3", title: "学校科技节创新作品征集通知", date: "2024-04-25", expired: false, category: "学校活动", content: "一年一度的学校科技节即将于5月20日启动，本届科技节的主题是\"创新引领未来\"。为激发学生的科学兴趣和创新精神，特向全体师生征集创新作品。作品形式不限，可以是科学实验、小发明、科幻画、编程作品等。请大家发挥想象力，提交您的奇思妙想和实践成果！优秀作品将在科技节期间进行展示，并有机会获得学校表彰。征集截止日期为5月10日，请将作品及相关说明提交至教务处。期待您的参与，共同探索科学的奥秘！" },
+  { id: "n4", title: "寒假社会实践活动总结大会通知", date: "2024-04-20", expired: true, category: "学校活动", content: "各位参与2024年寒假社会实践活动的同学：学校定于4月28日（星期日）上午9:00在多功能厅举行寒假社会实践活动总结大会。请各位同学务必准时参加，并准备好您的实践报告和心得体会。本次大会旨在分享实践经验，总结活动成果，并对表现优秀的同学进行表彰。请大家提前做好准备，将您的收获和感悟与大家分享。感谢所有同学的积极参与！" },
+  { id: "n5", title: "青少年情绪管理与压力应对讲座", date: "2024-04-18", expired: false, category: "心理辅导", content: "为了帮助青少年更好地应对学业和生活中的压力，提升情绪管理能力，学校特邀知名心理专家李老师于4月25日（星期四）下午3:00在学校报告厅举办\"青少年情绪管理与压力应对\"专题讲座。本次讲座将通过案例分析、互动问答等形式，为同学们提供实用的情绪调节技巧和压力应对策略。欢迎全体学生及家长积极参加，共同关注青少年的心理健康。期待您的到来，让我们一起学习如何更好地管理情绪，拥抱积极人生！" },
 ];
 
-const stats = {
-  total: 36,
-  read: 28,
-  unread: 8,
-};
-
 const donutData = [
-  { name: "已读", value: stats.read },
-  { name: "未读", value: stats.unread },
+  { name: "已读", value: 10 }, // 示例数据
+  { name: "未读", value: 3 },  // 示例数据
 ];
 const donutColors = ["#4F8CFF", "#E3E8F0"];
 
 export default function NotificationTrackerPage() {
+  const [showContentModal, setShowContentModal] = useState(false);
+  const [currentNotificationContent, setCurrentNotificationContent] = useState('');
+
+  const handleViewContent = (content: string) => {
+    setCurrentNotificationContent(content);
+    setShowContentModal(true);
+  };
+
   return (
     <div
-      className="min-h-screen flex flex-col relative overflow-hidden bg-white"
-      style={{
-        background: 'radial-gradient(circle at 30% 40%, rgba(182, 214, 255, 0.7) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(232, 230, 255, 0.7) 0%, transparent 50%), white',
-      }}
+      className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-blue-100"
     >
       {/* 顶部导航栏 */}
       <nav className="relative z-10 flex items-center justify-between bg-white/40 backdrop-blur-2xl border-b border-blue-100 px-8 py-4 mt-6 mb-8 shadow-lg rounded-[2.5rem] min-h-[72px] ring-2 ring-white/40 max-w-7xl w-full mx-auto" style={{boxShadow:'0 4px 32px 0 rgba(31,38,135,0.18),0 0 24px 2px #fff6,0 0 0 2px #fff4 inset',backdropFilter:'blur(24px)'}}>
@@ -65,50 +76,6 @@ export default function NotificationTrackerPage() {
           </div>
         </div>
       </nav>
-      {/* 统计概览区 */}
-      <section className="max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-6 mb-8 px-2 z-10">
-        <div className="flex-1 flex flex-row gap-6">
-          <div className="flex-1 bg-white/60 backdrop-blur-xl rounded-2xl shadow border border-blue-100 p-6 flex flex-col items-center min-w-[140px]">
-            <span className="text-gray-500 text-sm mb-1">总家长数</span>
-            <span className="text-2xl font-bold text-blue-700">{stats.total}</span>
-          </div>
-          <div className="flex-1 bg-white/60 backdrop-blur-xl rounded-2xl shadow border border-blue-100 p-6 flex flex-col items-center min-w-[140px]">
-            <span className="text-gray-500 text-sm mb-1">已读人数</span>
-            <span className="text-2xl font-bold text-green-600">{stats.read}</span>
-          </div>
-          <div className="flex-1 bg-white/60 backdrop-blur-xl rounded-2xl shadow border border-blue-100 p-6 flex flex-col items-center min-w-[140px]">
-            <span className="text-gray-500 text-sm mb-1">未读人数</span>
-            <span className="text-2xl font-bold text-red-500">{stats.unread}</span>
-          </div>
-          <div className="flex-1 bg-white/60 backdrop-blur-xl rounded-2xl shadow border border-blue-100 p-6 flex flex-col items-center min-w-[140px]">
-            <span className="text-gray-500 text-sm mb-1">阅读率</span>
-            <span className="text-2xl font-bold text-blue-900">{Math.round(stats.read / stats.total * 100)}%</span>
-          </div>
-        </div>
-        {/* 圆环图 */}
-        <div className="flex items-center justify-center min-w-[180px]">
-          {/* @ts-ignore */}
-          <PieChart width={120} height={120}>
-            {/* @ts-ignore */}
-            <Pie
-              data={donutData}
-              cx={60}
-              cy={60}
-              innerRadius={38}
-              outerRadius={54}
-              fill="#8884d8"
-              paddingAngle={2}
-              dataKey="value"
-              stroke="none"
-            >
-              {/* @ts-ignore */}
-              {donutData.map((entry, idx) => (
-                <Cell key={`cell-${idx}`} fill={donutColors[idx]} />
-              ))}
-            </Pie>
-          </PieChart>
-        </div>
-      </section>
       {/* 导出和新建通知按钮 */}
       <div className="max-w-7xl mx-auto w-full flex justify-end gap-4 px-2 mb-2 z-10">
         <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium shadow border border-blue-100 transition">
@@ -132,11 +99,46 @@ export default function NotificationTrackerPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Link href={`/notification-tracker/${n.id}`} className="px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-medium shadow border border-blue-100 transition">查看阅读情况</Link>
+                <button onClick={() => handleViewContent(n.content)} className="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium shadow border border-blue-100 transition">查看具体通知内容</button>
               </div>
             </div>
           ))}
         </div>
       </section>
+
+      {/* 通知内容模态框 */}
+      {showContentModal && (
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-md flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6 relative">
+            <h3 className="text-xl font-bold text-blue-900 mb-4">通知内容</h3>
+            <p className="text-gray-700 whitespace-pre-wrap mb-6">{currentNotificationContent}</p>
+            <button
+              onClick={() => setShowContentModal(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="max-w-7xl mx-auto w-full mt-6">
+        <div className="bg-white/60 backdrop-blur-xl rounded-2xl shadow border border-blue-100 p-6 hover:shadow-lg transition-all duration-300 cursor-pointer">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-bold text-blue-900">回复优化助手</h3>
+            <span className="text-sm text-blue-600 bg-blue-50 px-3 py-1 rounded-full">新功能</span>
+          </div>
+          <p className="text-gray-600 mb-4">教师可以针对系统外的提问手动输入进行回复优化</p>
+          <div className="flex items-center text-blue-600">
+            <span className="text-sm font-medium">立即使用</span>
+            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
   );
 } 

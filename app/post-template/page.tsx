@@ -7,7 +7,7 @@ import { ArrowLeft, Copy, BadgeCheck } from "lucide-react"; // Import Copy icon 
 export default function PostTemplate() {
   // 聊天历史与输入
   const [chatHistory, setChatHistory] = useState([
-    { role: "system", content: "你是小学教师家校沟通AI助手，请优化、润色、隐私保护教师输入的通知内容。" },
+    { role: "system", content: "你是小学教师家校沟通AI助手，请优化、润色、隐私保护教师输入的通知内容。你的回复请不要使用Markdown格式。这些通知是教师传递给家长的。如果遇到输入的内容是领导让教师传达给家长的，你需要理解具体的内容和重点，再把这个内容转化为教师发布给家长的内容。" },
   ]);
   const [input, setInput] = useState("");
   const [fileName, setFileName] = useState<string | null>(null);
@@ -29,7 +29,7 @@ export default function PostTemplate() {
       setOriginText(text);
       // 清空之前的优化结果和对话历史
       setOptimizeResult("");
-      setChatHistory([{ role: "system", content: "你是小学教师家校沟通AI助手，请优化、润色、隐私保护教师输入的通知内容。" }]);
+      setChatHistory([{ role: "system", content: "你是小学教师家校沟通AI助手，请优化、润色、隐私保护教师输入的通知内容。你的回复请不要使用Markdown格式。这些通知是教师传递给家长的。如果遇到输入的内容是领导让教师传达给家长的，你需要理解具体的内容和重点，再把这个内容转化为教师发布给家长的内容。" }]);
       setInput("");
     } catch (error) {
       console.error("文件读取失败:", error);
@@ -44,7 +44,7 @@ export default function PostTemplate() {
     setLoading(true);
     setOptimizeResult("");
     // 清空之前的对话历史，开始新的优化流程
-    setChatHistory([{ role: "system", content: "你是小学教师家校沟通AI助手，请优化、润色、隐私保护教师输入的通知内容。" }]);
+    setChatHistory([{ role: "system", content: "你是小学教师家校沟通AI助手，请优化、润色、隐私保护教师输入的通知内容。你的回复请不要使用Markdown格式。这些通知是教师传递给家长的。如果遇到输入的内容是领导让教师传达给家长的，你需要理解具体的内容和重点，再把这个内容转化为教师发布给家长的内容。" }]);
     setInput("");
 
     try {
@@ -53,7 +53,7 @@ export default function PostTemplate() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: [
-            { role: "system", content: "你是小学教师家校沟通AI助手，请优化、润色、隐私保护教师输入的通知内容。" },
+            { role: "system", content: "你是小学教师家校沟通AI助手，请优化、润色、隐私保护教师输入的通知内容。你的回复请不要使用Markdown格式。这些通知是教师传递给家长的。如果遇到输入的内容是领导让教师传达给家长的，你需要理解具体的内容和重点，再把这个内容转化为教师发布给家长的内容。" },
             { role: "user", content: `请优化以下通知：\n${originText}` }
           ]
         }),
@@ -98,7 +98,7 @@ export default function PostTemplate() {
     // 构建发送给API的消息历史
     // 包括系统消息，当前的优化结果（如果有）作为上下文，以及用户当前的指令
     const messagesToSend = [
-      chatHistory[0], // system message
+      { role: "system", content: "你是小学教师家校沟通AI助手，请优化、润色、隐私保护教师输入的通知内容。你的回复请不要使用Markdown格式。这些通知是教师传递给家长的。如果遇到输入的内容是领导让教师传达给家长的，你需要理解具体的内容和重点，再把这个内容转化为教师发布给家长的内容。" }, // system message
     ];
 
     if (optimizeResult) {

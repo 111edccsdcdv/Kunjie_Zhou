@@ -157,7 +157,7 @@ export default function ReplyTemplatePage() {
       </nav>
 
       {/* Page Title */}
-      <h1 className="text-3xl font-bold text-blue-900 mb-8 text-center">回复模板管理</h1>
+      <h1 className="text-3xl font-bold text-blue-900 mb-8 text-center">回复优化助手</h1>
 
       {/* 主体内容区域 */}
       <main className="relative z-10 flex flex-col md:flex-row gap-8 max-w-6xl mx-auto py-6 px-4 w-full items-stretch">
@@ -186,9 +186,13 @@ export default function ReplyTemplatePage() {
           {/* AI回复建议区域 */}
           <section className="w-full bg-white/70 backdrop-blur-2xl rounded-2xl shadow-lg border border-blue-100 p-6 flex-1"> {/* Added flex-1 to make it fill remaining height */}
               <h2 className="text-xl font-bold text-blue-800 mb-4">AI回复建议</h2>
-              {aiSuggestion ? (
-                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg shadow-inner whitespace-pre-line text-gray-900 text-sm flex-1 overflow-y-auto"> {/* Added flex-1 and overflow-y-auto */}
-                      {aiSuggestion}
+              <textarea
+                  className="w-full border border-blue-100 rounded-lg px-3 py-2 min-h-[300px] bg-white/40 focus:outline-blue-300 shadow-inner text-gray-900 placeholder-gray-500 resize-y"
+                  placeholder="AI生成的回复建议将在此显示。"
+                  value={aiSuggestion}
+                  onChange={(e) => setAiSuggestion(e.target.value)}
+                  disabled={loading}
+              ></textarea>
                       <div className="mt-4 flex justify-end">
                           <button
                               className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition shadow text-sm disabled:opacity-50 disabled:cursor-not-allowed"
@@ -198,10 +202,6 @@ export default function ReplyTemplatePage() {
                               {savedTemplates.some(template => template.suggestion === aiSuggestion.trim()) ? '已保存' : '保存为模板'}
                           </button>
                       </div>
-                  </div>
-              ) : (
-                  <p className="text-gray-600 text-sm">AI生成的回复建议将在此显示。</p>
-              )}
           </section>
         </div>
 
